@@ -18,15 +18,25 @@
 }
 .location-list ul li {
     padding: 10px 0;
+    cursor: pointer;
 }
 .location-list {
     padding: 20px;
 }
 .search-field{border-radius: 0}
-.map-area {
+.right{
     width: calc(100% - 30%);
     float: right;
 }
+.map-container,
+#map-area,
+html,
+body,
+.right{
+   
+    height: 100%;
+}
+#map-area{width: 100%;}
 button.list-btn {
     width: 100%;
     background: #eee;
@@ -37,12 +47,17 @@ button.list-btn {
     color: gray;
     font-size: 18px;
 }
+#pano{
+    width: 200px;
+        height: 200px;
+}
+
 @media only screen and (max-width: 768px) {
     .filter-menu{
         position: static;
         width:100%;
     }
-    .map-area{
+    .left,.right{
         width: 100%;
     }
     button.list-btn{
