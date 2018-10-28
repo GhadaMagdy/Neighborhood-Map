@@ -27,7 +27,8 @@
 
             <div class="menu-title"> Bart Locations</div>
             <div class="filter-box">
-                <input class="form-control search-field" data-bind="event:{keyup: changeList} " type="text" placeholder="Search..">
+                <!--{% comment %} data-bind="event:{keyup: changeList} " {% endcomment %}-->
+                <input class="form-control search-field"  data-bind="textInput: filterValue" type="text" placeholder="Search..">
 
             </div>
             <button class="list-btn">

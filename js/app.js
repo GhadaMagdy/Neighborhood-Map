@@ -60,7 +60,7 @@ function initMap() {
                 // Create an onclick event to open the large infowindow at each marker.
                 marker.addListener('click', function () {
                     mapView.populateInfoWindow(this, mapView.largeInfowindow);
-                    mapView.showweather(this);
+                    
 
                 });
                 // Two event listeners - one for mouseover, one for mouseout,
@@ -152,6 +152,8 @@ function initMap() {
         this.imagePath = ko.observable('');
         this.temperature = ko.observable('');
         this.weather = ko.observable('');
+        this.filterValue= ko.observable();
+       
 
         locations.forEach(function (loc) {
             locationtList.push(new location(loc));
@@ -171,7 +173,7 @@ function initMap() {
         }
         this.showInfo = function (index, clickedLocation) {
             mapView.populateInfoWindow(mapView.markers[index], mapView.largeInfowindow);
-            mapView.showweather(mapView.markers[index]);
+           self.showweather(mapView.markers[index]);
         };
         this.showweather=function(marker){
             var lat = marker.position.lat();
