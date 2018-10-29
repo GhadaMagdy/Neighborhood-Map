@@ -13,6 +13,7 @@ Udacity project with knockout JS framework and google maps API.
 * Points of locations markers can be filtered via earch filter
 * Page is responsive.  Navbar is hidden and toggleable with hamburger.
 * Page is built using Knockout JS
+* Show weather of clicked location
 
 ## Attributions:
 * [Google Maps API](https://developers.google.com/maps/)

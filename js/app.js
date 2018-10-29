@@ -60,7 +60,6 @@ function initMap() {
                 // Create an onclick event to open the large infowindow at each marker.
                 marker.addListener('click', function () {
                     mapView.populateInfoWindow(this, mapView.largeInfowindow);
-                    mapView.showweather(this);
 
                 });
                 // Two event listeners - one for mouseover, one for mouseout,
@@ -149,9 +148,11 @@ function initMap() {
         var self = this;
         var locations = modal.locationList;
         var locationtList = ko.observableArray([]);
-        this.imagePath = ko.observable('');
+        var defultWeather='../Neighborhood-Map/images/default-weather.png';
+        this.imagePath = ko.observable(defultWeather);
         this.temperature = ko.observable('');
         this.weather = ko.observable('');
+        this.filterValue=ko.observable('');
 
         locations.forEach(function (loc) {
             locationtList.push(new location(loc));
@@ -161,7 +162,7 @@ function initMap() {
         mapView.renderMap(self.currentList());
 
         this.changeList = function () {
-            var value = $('.search-field').val().toLowerCase();
+            var value = self.filterValue().toLowerCase();
             self.currentList(locationtList().filter(function (elem) {
                 return elem.title().toLowerCase().includes(value)
             }))
@@ -171,7 +172,7 @@ function initMap() {
         }
         this.showInfo = function (index, clickedLocation) {
             mapView.populateInfoWindow(mapView.markers[index], mapView.largeInfowindow);
-            mapView.showweather(mapView.markers[index]);
+            self.showweather(mapView.markers[index]);
         };
         this.showweather=function(marker){
             var lat = marker.position.lat();
@@ -181,10 +182,13 @@ function initMap() {
                 self.imagePath(`https://openweathermap.org/img/w/${data.weather[0].icon}.png`);
                 self.temperature (data.main.temp - 273.15);
                 self.weather(data.weather[0].main);
-            }).fail(() => alert("Cannot fetch weather data from the servers. Please try again later."));
+            }).fail(() => {
+                self.imagePath(defultWeather)
+                self.temperature ('');
+                self.weather("Cannot fetch weather data from the servers. Please try again later.");
+        });
 
         }
-        self.showweather(mapView.markers[0]);
 
 
     }
@@ -195,3 +199,6 @@ function initMap() {
     })
     ko.applyBindings(new viewModel());
 }
+function errorHandling() {
+    $('#map-area').html('<div class="map-fail>Google Maps has failed to load. Please try again.</div>')
+  }
