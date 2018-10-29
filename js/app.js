@@ -154,6 +154,7 @@ function initMap() {
         this.weather = ko.observable('');
         this.filterValue=ko.observable('');
 
+
         locations.forEach(function (loc) {
             locationtList.push(new location(loc));
         })
